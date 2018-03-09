@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormI2C", "FormI2C\FormI2C.csproj", "{996F4344-9372-40A6-9461-B038E39E859D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{996F4344-9372-40A6-9461-B038E39E859D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996F4344-9372-40A6-9461-B038E39E859D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996F4344-9372-40A6-9461-B038E39E859D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996F4344-9372-40A6-9461-B038E39E859D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7F48520-78CC-4FEF-84F9-26B7FA8034CC}
+	EndGlobalSection
+EndGlobal
