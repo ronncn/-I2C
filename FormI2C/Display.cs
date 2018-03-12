@@ -34,14 +34,14 @@ namespace FormI2C
         {
             Bitmap buffer = (Bitmap)bitmap.Clone();
             Graphics g = Graphics.FromImage(bitmap);
-            g.TranslateTransform(0, bitmap.Height / 2);
+            g.TranslateTransform(0, bitmap.Height-20);
             g.Clear(Color.Transparent);
-            g.DrawImage(buffer, 10 * list.Count, -bitmap.Height / 2);
+            g.DrawImage(buffer, 10 * list.Count, -bitmap.Height+20);
             index = list.Count;
             foreach (byte[] b in list)
             {
                 int y = (int)b[id];
-                g.DrawLine(Pens.Red, new Point(index * 10, (int)last_point), new Point((index - 1) * 10, (int)y));
+                g.DrawLine(Pens.Red, new Point(index * 10, -(int)last_point/5), new Point((index - 1) * 10, -(int)y/5));
                 last_point = y;
                 index--;
             }
