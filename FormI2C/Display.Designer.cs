@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Name = "Display";
+            this.SizeChanged += new System.EventHandler(this.Display_SizeChanged);
             this.ResumeLayout(false);
 
         }

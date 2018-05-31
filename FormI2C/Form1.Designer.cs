@@ -188,6 +188,7 @@
             this.textSCL.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textSCL.Location = new System.Drawing.Point(106, 11);
             this.textSCL.Name = "textSCL";
+            this.textSCL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textSCL.Size = new System.Drawing.Size(1077, 14);
             this.textSCL.TabIndex = 2;
             this.textSCL.WordWrap = false;
@@ -222,6 +223,7 @@
             this.textSDA.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)), true);
             this.textSDA.Location = new System.Drawing.Point(106, 13);
             this.textSDA.Name = "textSDA";
+            this.textSDA.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textSDA.Size = new System.Drawing.Size(1075, 14);
             this.textSDA.TabIndex = 1;
             this.textSDA.WordWrap = false;

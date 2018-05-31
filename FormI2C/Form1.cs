@@ -48,7 +48,15 @@ namespace FormI2C
             //重置按钮
             flag = false;
             timer1.Stop();
-
+            strSDA = "";
+            strSCL = "";
+            main = "";
+            text3 = "";
+            display1.ClearBitmap();
+            display2.ClearBitmap();
+            textSDA.Clear();
+            textSCL.Clear();
+            textBox1.Clear();
         }
         
         int cursor = 0;
@@ -110,6 +118,7 @@ namespace FormI2C
         private string strSDA = "";
         string main = "";
         string text3 = "";
+        string DataType = "Addr";
         private void getBufferData()
         {
             switch (pointer)
@@ -130,7 +139,7 @@ namespace FormI2C
                             //strSCL += "0";
                             SCL = 0;
                         }
-                        strSCL += SCL.ToString();
+                        strSCL = SCL + strSCL;
 
                         if (b[0x10] > 127)
                         {
@@ -142,8 +151,8 @@ namespace FormI2C
                             //strSDA += "0";
                             SDA = 0;
                         }
-                        main += SDA.ToString();
-                        strSDA += SDA.ToString();
+                        strSDA = SDA + strSDA;
+                        this.WriteI2c();
                     }
                     textSCL.Text = strSCL;
                     textSDA.Text = strSDA;
@@ -167,7 +176,7 @@ namespace FormI2C
                             //strSCL += "0";
                             SCL = 0;
                         }
-                        strSCL += SCL.ToString();
+                        strSCL = SCL + strSCL;
 
                         if (b[0x10] > 127)
                         {
@@ -179,8 +188,8 @@ namespace FormI2C
                             //strSDA += "0";
                             SDA = 0;
                         }
-                        main += SDA.ToString();
-                        strSDA += SDA.ToString();
+                        strSDA = SDA + strSDA;
+                        this.WriteI2c();
                     }
                     textSCL.Text = strSCL;
                     textSDA.Text = strSDA;
@@ -189,10 +198,68 @@ namespace FormI2C
                     pointer = 0;
                     break;
             }
-            textSDA.SelectionStart = textSDA.Text.Length;
-            textSCL.SelectionStart = textSCL.Text.Length;
         }
 
+        private void WriteI2c()
+        {
+            if (startFlag)
+            {
+                switch (DataType)
+                {
+                    case "Addr":
+                        if (i < 7)
+                        {
+                            main += SDA.ToString();
+                            //main += i.ToString();
+                            i++;
+                        }
+                        else if (i == 7)
+                        {
+                            if (SDA == 1)
+                            {
+                                main += " Read ";
+                            }
+                            else
+                            {
+                                main += " Write";
+                            }
+                            i++;
+                        }
+                        else if (i == 8)
+                        {
+                            textBox1.AppendText(DataType + ":" + main + " ACK ");
+                            main = "";
+                            i = 0;
+                            DataType = "Data";
+                        }
+                        else
+                        {
+                            i = 0;
+                        }
+                        break;
+                    case "Data":
+                        if (i < 8)
+                        {
+                            main += SDA.ToString();
+                            i++;
+                        }
+                        else if (i == 8)
+                        {
+                            textBox1.AppendText(DataType + ":" + main + " ACK ");
+                            main = "";
+                            i = 0;
+                        }
+                        else
+                        {
+                            i = 0;
+                        }
+                        break;
+                }
+            }
+        }
+
+        private bool startFlag = false;
+        private int i = 0;
         private void SDA_Changed()
         {
             if (SCL == 1)
@@ -201,16 +268,22 @@ namespace FormI2C
                 if (SDA == 0)
                 {
                     //开始信号
-                    text3 += "S";
-                    textBox1.Text = text3;
+                    text3 += "S ";
+                    textBox1.AppendText(text3);
+                    text3 = "";
                     main = "";
+                    startFlag = true;
                 }
                 else
                 {
                     //结束信号
+                    startFlag = false;
+                    DataType = "Addr";
+                    i = 0;
                     text3 += main;
-                    text3 += "P\r\n";
-                    textBox1.Text = text3;
+                    text3 += " P\r\n";
+                    textBox1.AppendText(text3);
+                    text3 = "";
                 }
 
                 this.textBox1.Focus();//获取焦点
@@ -243,6 +316,5 @@ namespace FormI2C
                 connect = true;
             }
         }
-
     }
 }

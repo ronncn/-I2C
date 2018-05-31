@@ -49,5 +49,18 @@ namespace FormI2C
             buffer.Dispose();
             base.Invalidate();
         }
+
+        public void ClearBitmap()
+        {
+            Graphics g = Graphics.FromImage(bitmap);
+            g.Clear(Color.Transparent);
+            g.Dispose();
+            base.Invalidate();
+        }
+
+        private void Display_SizeChanged(object sender, EventArgs e)
+        {
+            bitmap = new Bitmap(this.Width, this.Height);
+        }
     }
 }
